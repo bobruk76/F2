@@ -28,7 +28,7 @@ RUN pip3 install gunicorn
 
 COPY ./backend/entrypoint.sh ./
 RUN chmod +x entrypoint.sh
-
+ENTRYPOINT [ "./entrypoint.sh" ]
 COPY ./backend .
 
 

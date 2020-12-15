@@ -8,7 +8,7 @@ services:
    environment:
     - PORT=1337
     - DB_NAME=db_mongo
-   entrypoint: entrypoint.sh
+#   entrypoint: /entrypoint.sh
    ports:
      - 9081:1337
    depends_on:
