@@ -5,22 +5,32 @@
       <b-navbar type="dark" variant="dark">
         <b-navbar-nav>
           <b-nav-item href="#">Home</b-nav-item>
+            <b-nav-item-dropdown v-if="username" text="Опросники" right>
 
-          <b-nav-item-dropdown text="User" right>
-              <b-dropdown-item
-                    v-b-modal.logon-modal
-              >
-                LogOn
-              </b-dropdown-item>
+            <b-dropdown-item v-for="(questionnaire, index) in questionnaires" :key="index"
+                v-on:click.stop="getThisQuestionnaire($event)"
+                v-bind:id="questionnaire.id"
+                v-b-modal.testing-modal
+            >
+                {{ questionnaire.title }}
+            </b-dropdown-item>
 
+            </b-nav-item-dropdown>
+
+
+           <b-nav-item-dropdown  v-if="username" text="Личный кабинет">
               <b-dropdown-item
                       v-b-modal.result-modal
-
               >
-                Results
+                Результаты
             </b-dropdown-item>
-          </b-nav-item-dropdown>
-           <b-nav-item href="#">{{ username }}</b-nav-item>
+
+
+           </b-nav-item-dropdown>
+
+            <b-nav-item v-b-modal.logon-modal v-else>LogOn</b-nav-item>
+            <b-nav-item right>{{ username }}</b-nav-item>
+
         </b-navbar-nav>
       </b-navbar>
     </div>
@@ -35,20 +45,26 @@
         {{ confirmationSetting.message }}
       </b-alert>
 
-<!--        <p>{{ username }}</p>-->
-<!--        <b-button v-b-modal.logon-modal>LogOn</b-button>-->
 
-      <div class="list-group">
+      <b-modal
+              ref="modal"
+              id="questionnaires-modal"
+              title="Опросники"
+              hide-footer
+              @show="this.getQuestionnaires"
+         >
+          <div class="list-group">
 
-        <a v-for="(questionnaire, index) in questionnaires" :key="index"
-            class="list-group-item list-group-item-action list-group-item-light"
-            v-on:click.stop="getThisQuestionnaire($event)"
-            v-bind:id="questionnaire.id"
-            v-b-modal.testing-modal
-        >
-            {{ questionnaire.title }}
-        </a>
-      </div>
+            <a v-for="(questionnaire, index) in questionnaires" :key="index"
+                class="list-group-item list-group-item-action list-group-item-light"
+                v-on:click.stop="getThisQuestionnaire($event)"
+                v-bind:id="questionnaire.id"
+                v-b-modal.testing-modal
+            >
+                {{ questionnaire.title }}
+            </a>
+          </div>
+      </b-modal>
 
       <b-modal
               ref="modal"
@@ -120,13 +136,13 @@
 
          </b-modal>
 
-        <b-modal
+      <b-modal
           ref="modal"
           id="result-modal"
           :title="formResult.title"
           hide-footer
           @show="getResults"
-        >
+      >
             <table class="table table-dark table-stripped table-hover">
                 <thead class="thead-light">
                   <tr>
@@ -145,7 +161,7 @@
                 </tbody>
             </table>
 
-        </b-modal>
+      </b-modal>
 
   </div>
 

@@ -141,6 +141,6 @@ export default {
   },
 
   created() {
-    this.getQuestionnaires();
+
   },
 };
