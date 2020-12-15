@@ -3,9 +3,9 @@ FROM node:12.12.0-alpine as vue-build-stage
 
 WORKDIR /app
 
-COPY ./frontend/frontend/package.json ./
+COPY ./frontend/package.json ./
 RUN npm install
-COPY ./frontend/frontend .
+COPY ./frontend .
 
 RUN npm run build
 
@@ -20,12 +20,17 @@ RUN apk update \
 #RUN apk update \
 #  && apk add postgresql-dev gcc python3-dev
 COPY --from=vue-build-stage /app/dist /usr/share/nginx/html
-COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY ./nginx_default.conf /etc/nginx/conf.d/default.conf
 
 COPY ./backend/requirements.txt ./
 RUN pip3 install -r requirements.txt
 RUN pip3 install gunicorn
+
+COPY ./backend/entrypoint.sh ./
+RUN chmod +x entrypoint.sh
+
 COPY ./backend .
+
 
 CMD gunicorn --workers 4 --bind 0.0.0.0:5000 --daemon server:app \
   && sed -i -e "s/__PORT__/$PORT/" /etc/nginx/conf.d/default.conf \
