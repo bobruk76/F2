@@ -89,7 +89,7 @@
 
                     <li v-for="(answer, index) in question.answers" :key="index"
                         class="list-group-item list-group-item-action list-group-item-light">
-                       <div class="custom-control custom-checkbox text-left">
+                       <div v-if="answer.checkbox" class="custom-control custom-checkbox text-left">
                               <input type="checkbox" class="custom-control-input"
                                      :id="answer.id" :value="answer.id"  v-model="checkedAnswers">
 
@@ -97,6 +97,11 @@
                                 {{ answer.content }}
                               </label>
                         </div>
+<!--                        <b-form-group v-else label="Individual radios" v-slot="{ ariaDescribedby }">-->
+<!--                          <b-form-radio v-model="selected" :aria-describedby="ariaDescribedby" name="some-radios" value="A">Option A</b-form-radio>-->
+<!--                          <b-form-radio v-model="selected" :aria-describedby="ariaDescribedby" name="some-radios" value="B">Option B</b-form-radio>-->
+<!--                        </b-form-group>-->
+
                     </li>
                   </ul>
                 </div>

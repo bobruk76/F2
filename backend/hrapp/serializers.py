@@ -22,13 +22,17 @@ class QuestionSerializer(serializers.ModelSerializer):
     
     def get_answers(self, obj):
         return_data = None
+        count_true_answers = 0
         if type(obj.answers) == list:
             embedded_list = []
             for item in obj.answers:
                 embedded_dict = item.__dict__
                 for key in list(embedded_dict.keys()):
-                    if key.startswith('_'):
+                    if key == "isTrue" and embedded_dict[key]:
+                        count_true_answers += 1
+                    if key.startswith('_') or key == "isTrue":
                         embedded_dict.pop(key)
+
                 embedded_list.append(embedded_dict)
             return_data = embedded_list
         else:
@@ -37,6 +41,10 @@ class QuestionSerializer(serializers.ModelSerializer):
                 if key.startswith('_'):
                     embedded_dict.pop(key)
             return_data = embedded_dict
+
+        for item in return_data:
+            item['checkbox'] = (count_true_answers != 1)
+
         return return_data
 
 
