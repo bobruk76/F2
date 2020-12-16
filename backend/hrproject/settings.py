@@ -28,7 +28,7 @@ DB_NAME = os.getenv('DB_NAME', 'hr_db')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['178.154.246.178', '127.0.0.1', 'localhost', '*', ]
 
 
 # Application definition
