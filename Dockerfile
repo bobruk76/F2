@@ -1,5 +1,5 @@
 # frontend: node + js
-FROM node:12 as vue-build-stage
+FROM node:current-alpine as vue-build-stage
 
 WORKDIR /app
 
