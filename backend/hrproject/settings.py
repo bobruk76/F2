@@ -28,7 +28,7 @@ DB_NAME = os.getenv('DB_NAME', 'hr_db')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['178.154.246.178', '127.0.0.1', 'localhost', '*', ]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -58,7 +58,12 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:8080",
+    "http://localhost:8080",
+    "http://127.0.0.1:9000",
+    "http://178.154.246.178:80"
+]
 CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'hrproject.urls'
