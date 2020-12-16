@@ -17,8 +17,6 @@ RUN apk update \
   && apk add --no-cache python3 \
   && pip3 install --upgrade pip setuptools
 
-#RUN apk update \
-#  && apk add postgresql-dev gcc python3-dev
 COPY --from=vue-build-stage /app/dist /usr/share/nginx/html
 COPY ./nginx_default.conf /etc/nginx/conf.d/default.conf
 

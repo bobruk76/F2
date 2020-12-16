@@ -3,12 +3,10 @@ services:
   vue-django:
    build: .
    container_name: f2-vue-django
-#   image: F2:latest
    restart: unless-stopped
    environment:
     - PORT=1337
     - DB_NAME=db_mongo
-#   entrypoint: /entrypoint.sh
    ports:
      - 9081:1337
    depends_on:
