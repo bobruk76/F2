@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const BASE_API_URL = 'http://localhost:8000/api';
+//const BASE_API_URL = 'http://localhost:8000/api';
+const BASE_API_URL = '/api';
 
 export default {
   data() {
