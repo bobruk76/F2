@@ -14,6 +14,32 @@ services:
    links:
      - mongo
 
+#  vue:
+#    image: node:12
+#    container_name: f2_vue
+#    volumes:
+#      - ./frontend:/code
+#    working_dir: /code
+#    command: bash -c "npm i && npm run build"
+#
+#  django:
+#    image: python:3.8
+#    container_name: f2_django
+#    restart: unless-stopped
+#    environment:
+#     - PORT=8000
+#     - DB_NAME=db_mongo
+#    ports:
+#     - 8000:8000
+#    depends_on:
+#     - mongo
+#    links:
+#     - mongo
+#    volumes:
+#      - ./backend:/app
+#    working_dir: /app
+#    command: bash -c "pip install -r requirements.txt && python manage.py migrate --noinput && python manage.py collectstatic --noinput && python manage.py runserver"
+
   mongo:
     image: mongo:latest
     container_name: mongo
