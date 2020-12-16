@@ -77,6 +77,9 @@ class Result(models.Model):
     class Meta:
         abstract = True
 
+    def __str__(self):
+        return f'{self.questionnaire_id}'
+
 
 class ResultForm(forms.ModelForm):
     class Meta:
@@ -94,5 +97,8 @@ class Testing(models.Model):
     class Meta:
         verbose_name = 'Итоги тестирования'
         verbose_name_plural = 'Итоги тестирования'
+
+    def __str__(self):
+        return f'{self.username}'
 
     objects = models.DjongoManager()

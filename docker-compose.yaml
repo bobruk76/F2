@@ -1,18 +1,18 @@
 version: '3.7'
 services:
-  vue-django:
-   build: .
-   container_name: f2-vue-django
-   restart: unless-stopped
-   environment:
-    - PORT=1337
-    - DB_NAME=db_mongo
-   ports:
-     - 8080:1337
-   depends_on:
-     - mongo
-   links:
-     - mongo
+#  vue-django:
+#   build: .
+#   container_name: f2-vue-django
+#   restart: unless-stopped
+#   environment:
+#    - PORT=1337
+#    - DB_NAME=db_mongo
+#   ports:
+#     - 8080:1337
+#   depends_on:
+#     - mongo
+#   links:
+#     - mongo
 
 #  vue:
 #    image: node:12
