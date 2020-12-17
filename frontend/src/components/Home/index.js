@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const BASE_API_URL = 'http://localhost:8080/api';
-//const BASE_API_URL = '/api';
+//const BASE_API_URL = 'http://localhost:8080/api';
+const BASE_API_URL = '/api';
 
 export default {
   data() {
@@ -132,7 +132,7 @@ export default {
         const jwt = localStorage.getItem("jwt_token");
         this.config = {
         headers: {
-          'X-CSRFToken': this.$cookies.get('csrftoken'),
+            'X-CSRFToken': this.$cookies.get('csrftoken'),
            Authorization: `Bearer ${jwt}`,
         },
       };

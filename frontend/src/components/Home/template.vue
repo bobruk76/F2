@@ -45,27 +45,6 @@
         {{ confirmationSetting.message }}
       </b-alert>
 
-
-<!--      <b-modal-->
-<!--              ref="modal"-->
-<!--              id="questionnaires-modal"-->
-<!--              title="Опросники"-->
-<!--              hide-footer-->
-<!--              @show="this.getQuestionnaires"-->
-<!--         >-->
-<!--          <div class="list-group">-->
-
-<!--            <a v-for="(questionnaire, index) in questionnaires" :key="index"-->
-<!--                class="list-group-item list-group-item-action list-group-item-light"-->
-<!--                v-on:click.stop="getThisQuestionnaire($event)"-->
-<!--                v-bind:id="questionnaire.id"-->
-<!--                v-b-modal.testing-modal-->
-<!--            >-->
-<!--                {{ questionnaire.title }}-->
-<!--            </a>-->
-<!--          </div>-->
-<!--      </b-modal>-->
-
       <b-modal
               ref="modal"
               id="testing-modal"
