@@ -5,11 +5,11 @@ services:
 #   container_name: f2-vue-django
 #   restart: unless-stopped
 #   environment:
-#    - PORT=8080
+#    - PORT=8000
 #    - DB_NAME=db_mongo
 #    - DB_HOST=mongo
 #   ports:
-#     - 8080:8080
+#     - 8000:8000
 #   depends_on:
 #     - mongo
 #   links:
