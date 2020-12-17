@@ -46,25 +46,25 @@
       </b-alert>
 
 
-      <b-modal
-              ref="modal"
-              id="questionnaires-modal"
-              title="Опросники"
-              hide-footer
-              @show="this.getQuestionnaires"
-         >
-          <div class="list-group">
+<!--      <b-modal-->
+<!--              ref="modal"-->
+<!--              id="questionnaires-modal"-->
+<!--              title="Опросники"-->
+<!--              hide-footer-->
+<!--              @show="this.getQuestionnaires"-->
+<!--         >-->
+<!--          <div class="list-group">-->
 
-            <a v-for="(questionnaire, index) in questionnaires" :key="index"
-                class="list-group-item list-group-item-action list-group-item-light"
-                v-on:click.stop="getThisQuestionnaire($event)"
-                v-bind:id="questionnaire.id"
-                v-b-modal.testing-modal
-            >
-                {{ questionnaire.title }}
-            </a>
-          </div>
-      </b-modal>
+<!--            <a v-for="(questionnaire, index) in questionnaires" :key="index"-->
+<!--                class="list-group-item list-group-item-action list-group-item-light"-->
+<!--                v-on:click.stop="getThisQuestionnaire($event)"-->
+<!--                v-bind:id="questionnaire.id"-->
+<!--                v-b-modal.testing-modal-->
+<!--            >-->
+<!--                {{ questionnaire.title }}-->
+<!--            </a>-->
+<!--          </div>-->
+<!--      </b-modal>-->
 
       <b-modal
               ref="modal"
@@ -88,37 +88,36 @@
                   <ul class="list-group">
 
                     <li class="list-group-item list-group-item-action list-group-item-light">
-<!--                       <div v-if="answer[0].checkbox"-->
-<!--                            v-for="(answer, index) in question.answers" :key="index"-->
-<!--                            class="custom-control custom-checkbox text-left">-->
-<!--                              <input type="checkbox" class="custom-control-input"-->
-<!--                                     :id="answer.id" :value="answer.id"  v-model="checkedAnswers">-->
 
-<!--                              <label class="custom-control-label" :for="answer.id">-->
-<!--                                {{ answer.content }}-->
-<!--                              </label>-->
-<!--                        </div>-->
-
+                        <b-form-group
+                                v-if="question.answers[0].checkbox"
+                                v-slot="{ index }"
+                        >
                             <b-form-checkbox-group
-                                    v-if="question.answers[0].checkbox"
-                                    v-model="value"
                                     :options="question.answers"
+                                    v-model="checkedAnswers"
                                     value-field="id"
-                                    class="mb-3"
                                     text-field="content"
                                     plain
                                     stacked
+                                    size="lg"
+                                    :aria-describedby="index"
                             ></b-form-checkbox-group>
+                        </b-form-group>
+
+                        <b-form-group v-else>
                             <b-form-radio-group
-                                    v-else
-                                    v-model="value"
                                     :options="question.answers"
+                                    v-model="checkedRadioAnswers[index]"
                                     value-field="id"
-                                    class="mb-3"
                                     text-field="content"
                                     plain
                                     stacked
+                                    size="lg"
+                                    :aria-describedby="index"
                             ></b-form-radio-group>
+                        </b-form-group>
+
                     </li>
                   </ul>
                 </div>

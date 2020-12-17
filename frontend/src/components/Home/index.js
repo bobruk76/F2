@@ -13,6 +13,7 @@ export default {
       questionnaire_id: '',
       config: {},
       checkedAnswers: [],
+      checkedRadioAnswers: [],
       questions: [],
       results: {},
 
@@ -38,12 +39,6 @@ export default {
 
     };
   },
-//  computed: {
-//      state() {
-//        this.checkedAnswers.push(this.value);
-//        console.log(this.checkedAnswers);
-//      }
-//  },
   methods: {
 
     onLogonSubmit(event) {
@@ -75,8 +70,11 @@ export default {
     onSubmitTesting(event) {
         event.preventDefault();
 
+        for (var item in this.checkedRadioAnswers) {
+            if (item) this.checkedAnswers.push(this.checkedRadioAnswers[item]);
+        }
+
         this.setConfig();
-        console.log(this.questions);
 
         const requestData = {
             answers: JSON.stringify(this.checkedAnswers),
@@ -85,9 +83,7 @@ export default {
 
         axios.post(`${BASE_API_URL}/test/`, requestData, this.config)
             .then((response) => {
-                  console.log(response);
-
-                  this.addConfirmation('success', `Правильных ответов ${response.data.count_correct_answers} из ${response.data.count_questionnaire_true_answers}
+                   this.addConfirmation('success', `Правильных ответов ${response.data.count_correct_answers} из ${response.data.count_questionnaire_true_answers}
                   неправильных ответов ${response.data.count_incorrect_answers}`, 10);
                 })
             .catch(error => {
@@ -118,6 +114,7 @@ export default {
 
     getThisQuestionnaire(event) {
         this.checkedAnswers=[]
+        this.checkedRadioAnswers=[]
         this.setConfig();
         this.questionnaire_id=event.currentTarget.id;
         axios.get(`${BASE_API_URL}/questionnaire/${this.questionnaire_id}`,this.config)
