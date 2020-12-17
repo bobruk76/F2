@@ -44,6 +44,7 @@ class QuestionSerializer(serializers.ModelSerializer):
 
         for item in return_data:
             item['checkbox'] = (count_true_answers != 1)
+            item['value'] = False
 
         return return_data
 

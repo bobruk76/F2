@@ -38,6 +38,12 @@ export default {
 
     };
   },
+//  computed: {
+//      state() {
+//        this.checkedAnswers.push(this.value);
+//        console.log(this.checkedAnswers);
+//      }
+//  },
   methods: {
 
     onLogonSubmit(event) {
@@ -70,6 +76,7 @@ export default {
         event.preventDefault();
 
         this.setConfig();
+        console.log(this.questions);
 
         const requestData = {
             answers: JSON.stringify(this.checkedAnswers),
